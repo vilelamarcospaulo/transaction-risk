@@ -1,9 +1,10 @@
-package riskevaluator_test
+package chain_test
 
 import (
 	"testing"
 
-	riskevaluator "github.com/vilelamarcospaulo/risk/internal/risk_evaluator"
+	evaluator "github.com/vilelamarcospaulo/risk/internal/risk_evaluator"
+	rule "github.com/vilelamarcospaulo/risk/internal/risk_evaluator/evaluator_rule"
 	"github.com/vilelamarcospaulo/risk/internal/transaction"
 )
 
@@ -12,8 +13,8 @@ func TestShouldProcessAllChainForTransaction_Bellow5K(t *testing.T) {
 	transaction := transaction.Transaction{
 		Amount_us_cents: 4_000_00,
 	}
-	head := riskevaluator.AmountAbove10K()
-	node1 := riskevaluator.AmountAbove5K()
+	head := rule.AmountAbove10K()
+	node1 := rule.AmountAbove5K()
 
 	head.Append(node1)
 
@@ -25,7 +26,7 @@ func TestShouldProcessAllChainForTransaction_Bellow5K(t *testing.T) {
 		t.Errorf("received error %s", err)
 	}
 
-	if risk != riskevaluator.Low {
+	if risk != evaluator.Low {
 		t.Errorf("received %d but expected Low", risk)
 	}
 }
@@ -35,8 +36,8 @@ func TestShouldProcessChainForTransaction_Bellow10K(t *testing.T) {
 	transaction := transaction.Transaction{
 		Amount_us_cents: 7_000_00,
 	}
-	head := riskevaluator.AmountAbove10K()
-	node1 := riskevaluator.AmountAbove5K()
+	head := rule.AmountAbove10K()
+	node1 := rule.AmountAbove5K()
 
 	head.Append(node1)
 
@@ -48,7 +49,7 @@ func TestShouldProcessChainForTransaction_Bellow10K(t *testing.T) {
 		t.Errorf("received error %s", err)
 	}
 
-	if risk != riskevaluator.Medium {
+	if risk != evaluator.Medium {
 		t.Errorf("received %d but expected Medium", risk)
 	}
 }
@@ -58,8 +59,8 @@ func TestShouldProcessChainForTransaction_Above10K(t *testing.T) {
 	transaction := transaction.Transaction{
 		Amount_us_cents: 10_500_00,
 	}
-	head := riskevaluator.AmountAbove10K()
-	node1 := riskevaluator.AmountAbove5K()
+	head := rule.AmountAbove10K()
+	node1 := rule.AmountAbove5K()
 
 	head.Append(node1)
 
@@ -71,7 +72,7 @@ func TestShouldProcessChainForTransaction_Above10K(t *testing.T) {
 		t.Errorf("received error %s", err)
 	}
 
-	if risk != riskevaluator.High {
+	if risk != evaluator.High {
 		t.Errorf("received %d but expected High", risk)
 	}
 }
