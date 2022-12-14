@@ -3,6 +3,7 @@ package rule
 import (
 	evaluator "github.com/vilelamarcospaulo/risk/internal/risk_evaluator"
 	chain "github.com/vilelamarcospaulo/risk/internal/risk_evaluator/evaluator_chain"
+	context "github.com/vilelamarcospaulo/risk/internal/risk_evaluator/evaluator_context"
 	"github.com/vilelamarcospaulo/risk/internal/transaction"
 )
 
@@ -18,8 +19,8 @@ func amountAbove(valueInUsCents int, riskLevel evaluator.RiskLevel) *chain.Node 
 	return chain.NewNode(checkValueAbove(valueInUsCents), riskLevel)
 }
 
-func checkValueAbove(valueInUsCents int) func(transaction transaction.Transaction, globalContext []transaction.Transaction) (bool, error) {
-	return func(transaction transaction.Transaction, globalContext []transaction.Transaction) (bool, error) {
+func checkValueAbove(valueInUsCents int) func(transaction transaction.Transaction, globalContext *context.EvalContext) (bool, error) {
+	return func(transaction transaction.Transaction, globalContext *context.EvalContext) (bool, error) {
 		return transaction.Amount_us_cents > valueInUsCents, nil
 	}
 }
