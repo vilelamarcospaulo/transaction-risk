@@ -1,21 +1,28 @@
 package chain
 
 import (
-	evaluator "github.com/vilelamarcospaulo/risk/internal/risk_evaluator"
 	context "github.com/vilelamarcospaulo/risk/internal/risk_evaluator/evaluator_context"
 	"github.com/vilelamarcospaulo/risk/internal/transaction"
+)
+
+type RiskLevel int64
+
+const (
+	Low RiskLevel = iota
+	Medium
+	High
 )
 
 // Based on chain of responsibility pattern
 type Node struct {
 	next      *Node
 	predicate func(transaction.Transaction, *context.EvalContext) (bool, error)
-	riskLevel evaluator.RiskLevel
+	riskLevel RiskLevel
 }
 
 func NewNode(
 	predicate func(transaction.Transaction, *context.EvalContext) (bool, error),
-	riskLevel evaluator.RiskLevel) *Node {
+	riskLevel RiskLevel) *Node {
 	return &Node{
 		next:      nil,
 		predicate: predicate,
@@ -23,7 +30,7 @@ func NewNode(
 	}
 }
 
-func (e Node) EvaluateTransactionRisk(transaction transaction.Transaction, evalContext *context.EvalContext) (evaluator.RiskLevel, error) {
+func (e Node) EvaluateTransactionRisk(transaction transaction.Transaction, evalContext *context.EvalContext) (RiskLevel, error) {
 	if evalContext != nil {
 		evalContext.UserProcessSpend(transaction)
 	}
@@ -42,7 +49,7 @@ func (e Node) EvaluateTransactionRisk(transaction transaction.Transaction, evalC
 		return e.next.EvaluateTransactionRisk(transaction, evalContext)
 	}
 
-	return evaluator.Low, nil
+	return Low, nil
 }
 
 func (e *Node) Append(next *Node) {

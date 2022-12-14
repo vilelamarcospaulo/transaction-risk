@@ -3,7 +3,7 @@ package chain_test
 import (
 	"testing"
 
-	evaluator "github.com/vilelamarcospaulo/risk/internal/risk_evaluator"
+	chain "github.com/vilelamarcospaulo/risk/internal/risk_evaluator/evaluator_chain"
 	rule "github.com/vilelamarcospaulo/risk/internal/risk_evaluator/evaluator_rule"
 	"github.com/vilelamarcospaulo/risk/internal/transaction"
 )
@@ -26,7 +26,7 @@ func TestShouldProcessAllChainForTransaction_Bellow5K(t *testing.T) {
 		t.Errorf("received error %s", err)
 	}
 
-	if risk != evaluator.Low {
+	if risk != chain.Low {
 		t.Errorf("received %d but expected Low", risk)
 	}
 }
@@ -49,7 +49,7 @@ func TestShouldProcessChainForTransaction_Bellow10K(t *testing.T) {
 		t.Errorf("received error %s", err)
 	}
 
-	if risk != evaluator.Medium {
+	if risk != chain.Medium {
 		t.Errorf("received %d but expected Medium", risk)
 	}
 }
@@ -72,7 +72,7 @@ func TestShouldProcessChainForTransaction_Above10K(t *testing.T) {
 		t.Errorf("received error %s", err)
 	}
 
-	if risk != evaluator.High {
+	if risk != chain.High {
 		t.Errorf("received %d but expected High", risk)
 	}
 }
