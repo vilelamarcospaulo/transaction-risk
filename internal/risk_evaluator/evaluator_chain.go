@@ -34,3 +34,11 @@ func (e evaluatorNode) EvaluateTransactionRisk(transaction transaction.Transacti
 
 	return Low, nil
 }
+
+func (e *evaluatorNode) Append(next *evaluatorNode) {
+	current := e
+	for ; current.next != nil; current = current.next {
+	}
+
+	current.next = next
+}
