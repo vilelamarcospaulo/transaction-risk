@@ -15,7 +15,7 @@ func TestTransactionRiskLevelShouldBeLowWhenAmountBellow10K(t *testing.T) {
 	evaluatorNode := riskevaluator.AmountAbove10K()
 
 	// ACT
-	risk, err := evaluatorNode.EvaluateTransactionRisk(transaction)
+	risk, err := evaluatorNode.EvaluateTransactionRisk(transaction, nil)
 
 	// ASSERT
 	if err != nil {
@@ -35,7 +35,7 @@ func TestTransactionRiskLevelShouldBeHighWhenAmountAbove10K(t *testing.T) {
 	evaluatorNode := riskevaluator.AmountAbove10K()
 
 	// ACT
-	risk, err := evaluatorNode.EvaluateTransactionRisk(transaction)
+	risk, err := evaluatorNode.EvaluateTransactionRisk(transaction, nil)
 
 	// ASSERT
 	if err != nil {

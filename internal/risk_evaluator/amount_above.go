@@ -18,8 +18,8 @@ func amountAbove(valueInUsCents int, riskLevel RiskLevel) *evaluatorNode {
 	}
 
 }
-func checkValueAbove(valueInUsCents int) func(transaction transaction.Transaction, globalContext *[]transaction.Transaction) (bool, error) {
-	return func(transaction transaction.Transaction, globalContext *[]transaction.Transaction) (bool, error) {
+func checkValueAbove(valueInUsCents int) func(transaction transaction.Transaction, globalContext []transaction.Transaction) (bool, error) {
+	return func(transaction transaction.Transaction, globalContext []transaction.Transaction) (bool, error) {
 		return transaction.Amount_us_cents > valueInUsCents, nil
 	}
 }

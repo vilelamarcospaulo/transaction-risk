@@ -18,7 +18,7 @@ func TestShouldProcessAllChainForTransaction_Bellow5K(t *testing.T) {
 	head.Append(node1)
 
 	// ACT
-	risk, err := head.EvaluateTransactionRisk(transaction)
+	risk, err := head.EvaluateTransactionRisk(transaction, nil)
 
 	// ASSERT
 	if err != nil {
@@ -41,7 +41,7 @@ func TestShouldProcessChainForTransaction_Bellow10K(t *testing.T) {
 	head.Append(node1)
 
 	// ACT
-	risk, err := head.EvaluateTransactionRisk(transaction)
+	risk, err := head.EvaluateTransactionRisk(transaction, nil)
 
 	// ASSERT
 	if err != nil {
@@ -64,7 +64,7 @@ func TestShouldProcessChainForTransaction_Above10K(t *testing.T) {
 	head.Append(node1)
 
 	// ACT
-	risk, err := head.EvaluateTransactionRisk(transaction)
+	risk, err := head.EvaluateTransactionRisk(transaction, nil)
 
 	// ASSERT
 	if err != nil {
