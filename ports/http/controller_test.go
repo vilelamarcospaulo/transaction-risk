@@ -18,25 +18,46 @@ func TestShouldProcessAllTransactionAndBuildReturn(t *testing.T) {
 				Id:              1,
 				User_id:         1,
 				Card_id:         1,
-				Amount_us_cents: 4_000_00,
+				Amount_us_cents: 200000,
 			},
 			{
 				Id:              2,
 				User_id:         1,
 				Card_id:         1,
-				Amount_us_cents: 3_000_00,
+				Amount_us_cents: 6_000_00,
 			},
 			{
 				Id:              3,
-				User_id:         2,
+				User_id:         1,
 				Card_id:         1,
-				Amount_us_cents: 10_000_01,
+				Amount_us_cents: 11_000_00,
+			},
+			{
+				Id:              4,
+				User_id:         2,
+				Card_id:         2,
+				Amount_us_cents: 1_000_00,
+			},
+			{
+				Id:              5,
+				User_id:         2,
+				Card_id:         3,
+				Amount_us_cents: 1_000_00,
+			},
+			{
+				Id:              6,
+				User_id:         2,
+				Card_id:         4,
+				Amount_us_cents: 1_000_00,
 			},
 		},
 	}
-
 	rules := []*chain.Node{
+		rule.MoreThan2Cards(),
+		rule.SpendAbove20K(),
 		rule.AmountAbove10K(),
+		rule.MoreThan1Cards(),
+		rule.SpendAbove10K(),
 		rule.AmountAbove5K(),
 	}
 
@@ -53,7 +74,7 @@ func TestShouldProcessAllTransactionAndBuildReturn(t *testing.T) {
 
 	expected := httpz.RiskResponse{
 		Risk_ratings: []string{
-			"Low", "Low", "High",
+			"Low", "Medium", "High", "Low", "Medium", "High",
 		},
 	}
 
