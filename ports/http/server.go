@@ -21,17 +21,15 @@ type RiskResponse struct {
 	Risk_ratings []string
 }
 
-type RiskController = func(req RiskRequest) RiskResponse
-
 type TransactionRiskHttpServer struct {
 	httpHandler *http.ServeMux
 	controller  RiskController
 }
 
-func NewServer(controller RiskController) *TransactionRiskHttpServer {
+func NewServer(controller *RiskController) *TransactionRiskHttpServer {
 	return &TransactionRiskHttpServer{
 		httpHandler: http.NewServeMux(),
-		controller:  controller,
+		controller:  *controller,
 	}
 }
 
@@ -56,7 +54,7 @@ func processHttpRequest(controller RiskController) func(w http.ResponseWriter, r
 			panic(err)
 		}
 
-		result := controller(payload)
+		result, _ := controller.Process(payload)
 		json.NewEncoder(w).Encode(result)
 	}
 }
