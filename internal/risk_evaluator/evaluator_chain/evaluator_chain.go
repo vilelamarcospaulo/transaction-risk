@@ -7,18 +7,17 @@ import (
 )
 
 // Based on chain of responsibility pattern
+type Predicate = func(transaction.Transaction, *context.EvalContext) (bool, error)
 type Node struct {
 	next      *Node
-	predicate func(transaction.Transaction, *context.EvalContext) (bool, error)
+	predicate Predicate
 	riskLevel level.RiskLevel
 }
 
-func NewNode(
-	predicate func(transaction.Transaction, *context.EvalContext) (bool, error),
-	riskLevel level.RiskLevel) *Node {
+func NewNode(p Predicate, riskLevel level.RiskLevel) *Node {
 	return &Node{
 		next:      nil,
-		predicate: predicate,
+		predicate: p,
 		riskLevel: riskLevel,
 	}
 }

@@ -16,11 +16,8 @@ func AmountAbove10K() *chain.Node {
 }
 
 func amountAbove(valueInUsCents int, riskLevel level.RiskLevel) *chain.Node {
-	return chain.NewNode(checkValueAbove(valueInUsCents), riskLevel)
-}
-
-func checkValueAbove(valueInUsCents int) func(transaction transaction.Transaction, globalContext *context.EvalContext) (bool, error) {
-	return func(transaction transaction.Transaction, globalContext *context.EvalContext) (bool, error) {
-		return transaction.AmountUsCents > valueInUsCents, nil
-	}
+	return chain.NewNode(
+		func(t transaction.Transaction, context *context.EvalContext) (bool, error) {
+			return t.AmountUsCents > valueInUsCents, nil
+		}, riskLevel)
 }
