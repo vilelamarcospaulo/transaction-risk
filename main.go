@@ -9,7 +9,11 @@ import (
 
 func main() {
 	rules := []*chain.Node{
+		rule.MoreThan2Cards(),
+		rule.SpendAbove20K(),
 		rule.AmountAbove10K(),
+		rule.MoreThan1Cards(),
+		rule.SpendAbove10K(),
 		rule.AmountAbove5K(),
 	}
 	evaluator := evaluator.NewEvaluator(rules)

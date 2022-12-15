@@ -28,6 +28,7 @@ func NewEvaluator(nodes []*chain.Node) *Evaluator {
 func (e *Evaluator) Eval(transactions []transaction.Transaction) ([]level.RiskLevel, error) {
 	var result []level.RiskLevel
 	for _, t := range transactions {
+		e.context.UserProcessSpend(t)
 		tRisk, err := e.head.EvaluateTransactionRisk(t, e.context)
 		if err != nil {
 			return nil, err
