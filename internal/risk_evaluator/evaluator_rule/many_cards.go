@@ -9,21 +9,21 @@ import (
 	"github.com/vilelamarcospaulo/risk/internal/transaction"
 )
 
-func SpendAbove10K() *chain.Node {
-	return spendAbove(10_000_00, level.Medium)
+func MoreThan1Cards() *chain.Node {
+	return manyCards(1, level.Medium)
 }
 
-func SpendAbove20K() *chain.Node {
-	return spendAbove(20_000_00, level.High)
+func MoreThan2Cards() *chain.Node {
+	return manyCards(2, level.High)
 }
 
-func spendAbove(valueInUsCents int, riskLevel level.RiskLevel) *chain.Node {
+func manyCards(cardsLimit int, riskLevel level.RiskLevel) *chain.Node {
 	return chain.NewNode(
 		func(t transaction.Transaction, context *context.EvalContext) (bool, error) {
 			if context == nil {
-				return false, errors.New("can't define spend without context")
+				return false, errors.New("can't define cards number without context")
 			}
 
-			return context.GetUserContext(t.UserId).TotalSpend > valueInUsCents, nil
+			return cardsLimit < len(context.GetUserContext(t.UserId).UserCards), nil
 		}, riskLevel)
 }

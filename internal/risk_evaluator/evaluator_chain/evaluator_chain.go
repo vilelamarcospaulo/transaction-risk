@@ -23,10 +23,6 @@ func NewNode(p Predicate, riskLevel level.RiskLevel) *Node {
 }
 
 func (e Node) EvaluateTransactionRisk(transaction transaction.Transaction, evalContext *context.EvalContext) (level.RiskLevel, error) {
-	if evalContext != nil {
-		evalContext.UserProcessSpend(transaction)
-	}
-
 	matched, err := e.predicate(transaction, evalContext)
 
 	if matched {
