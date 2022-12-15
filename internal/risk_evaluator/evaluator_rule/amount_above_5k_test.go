@@ -3,8 +3,8 @@ package rule_test
 import (
 	"testing"
 
-	chain "github.com/vilelamarcospaulo/risk/internal/risk_evaluator/evaluator_chain"
 	rule "github.com/vilelamarcospaulo/risk/internal/risk_evaluator/evaluator_rule"
+	level "github.com/vilelamarcospaulo/risk/internal/risk_evaluator/risk_level"
 	"github.com/vilelamarcospaulo/risk/internal/transaction"
 )
 
@@ -23,7 +23,7 @@ func TestTransactionRiskLevelShouldBeLowWhenAmountBellow5K(t *testing.T) {
 		t.Errorf("received error %s", err)
 	}
 
-	if risk != chain.Low {
+	if risk != level.Low {
 		t.Errorf("received %d but expected Low", risk)
 	}
 }
@@ -43,7 +43,7 @@ func TestTransactionRiskLevelShouldBeMediumWhenAmountAbove5K(t *testing.T) {
 		t.Errorf("received error %s", err)
 	}
 
-	if risk != chain.Medium {
+	if risk != level.Medium {
 		t.Errorf("received %d but expected Medium", risk)
 	}
 }

@@ -3,6 +3,7 @@ package evaluator
 import (
 	chain "github.com/vilelamarcospaulo/risk/internal/risk_evaluator/evaluator_chain"
 	context "github.com/vilelamarcospaulo/risk/internal/risk_evaluator/evaluator_context"
+	level "github.com/vilelamarcospaulo/risk/internal/risk_evaluator/risk_level"
 	"github.com/vilelamarcospaulo/risk/internal/transaction"
 )
 
@@ -24,8 +25,8 @@ func NewEvaluator(nodes []*chain.Node) *Evaluator {
 	}
 }
 
-func (e *Evaluator) Eval(transactions []transaction.Transaction) ([]chain.RiskLevel, error) {
-	var result []chain.RiskLevel
+func (e *Evaluator) Eval(transactions []transaction.Transaction) ([]level.RiskLevel, error) {
+	var result []level.RiskLevel
 	for _, t := range transactions {
 		tRisk, err := e.head.EvaluateTransactionRisk(t, e.context)
 		if err != nil {
