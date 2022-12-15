@@ -11,7 +11,7 @@ import (
 func TestTransactionRiskLevelShouldBeLowWhenAmountBellow10K(t *testing.T) {
 	// ARRANGE
 	transaction := transaction.Transaction{
-		Amount_us_cents: 9_000_00,
+		AmountUsCents: 9_000_00,
 	}
 	evaluatorNode := rule.AmountAbove10K()
 
@@ -31,7 +31,7 @@ func TestTransactionRiskLevelShouldBeLowWhenAmountBellow10K(t *testing.T) {
 func TestTransactionRiskLevelShouldBeHighWhenAmountAbove10K(t *testing.T) {
 	// ARRANGE
 	transaction := transaction.Transaction{
-		Amount_us_cents: 10_001_00,
+		AmountUsCents: 10_001_00,
 	}
 	evaluatorNode := rule.AmountAbove10K()
 

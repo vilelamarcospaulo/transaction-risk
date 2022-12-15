@@ -25,10 +25,10 @@ func NewEvalContext() *EvalContext {
 }
 
 func (c *EvalContext) UserProcessSpend(transaction transaction.Transaction) {
-	userContext := c.GetUserContext(transaction.User_id)
+	userContext := c.GetUserContext(transaction.UserId)
 
-	userContext.TotalSpend += transaction.Amount_us_cents
-	userContext.UserCards[transaction.Card_id] = true
+	userContext.TotalSpend += transaction.AmountUsCents
+	userContext.UserCards[transaction.CardId] = true
 }
 
 func (c *EvalContext) GetUserContext(userId int) *userContext {

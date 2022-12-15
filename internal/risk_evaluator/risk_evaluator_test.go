@@ -14,19 +14,19 @@ func TestShouldProcessAllTransactionInEachRule(t *testing.T) {
 	// ARRANGE
 	transactions := []transaction.Transaction{
 		{
-			User_id:         1,
-			Card_id:         1,
-			Amount_us_cents: 4_000_00,
+			UserId:        1,
+			CardId:        1,
+			AmountUsCents: 4_000_00,
 		},
 		{
-			User_id:         1,
-			Card_id:         1,
-			Amount_us_cents: 3_000_00,
+			UserId:        1,
+			CardId:        1,
+			AmountUsCents: 3_000_00,
 		},
 		{
-			User_id:         2,
-			Card_id:         1,
-			Amount_us_cents: 10_000_01,
+			UserId:        2,
+			CardId:        1,
+			AmountUsCents: 10_000_01,
 		},
 	}
 

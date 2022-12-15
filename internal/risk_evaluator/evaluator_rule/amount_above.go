@@ -20,6 +20,6 @@ func amountAbove(valueInUsCents int, riskLevel chain.RiskLevel) *chain.Node {
 
 func checkValueAbove(valueInUsCents int) func(transaction transaction.Transaction, globalContext *context.EvalContext) (bool, error) {
 	return func(transaction transaction.Transaction, globalContext *context.EvalContext) (bool, error) {
-		return transaction.Amount_us_cents > valueInUsCents, nil
+		return transaction.AmountUsCents > valueInUsCents, nil
 	}
 }

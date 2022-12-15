@@ -13,21 +13,21 @@ func TestTransactionContext_ShouldIncreaseUserSpendAfterEachConsult(t *testing.T
 
 	// ACT
 	context.UserProcessSpend(transaction.Transaction{
-		User_id:         1,
-		Card_id:         1,
-		Amount_us_cents: 100,
+		UserId:        1,
+		CardId:        1,
+		AmountUsCents: 100,
 	})
 
 	context.UserProcessSpend(transaction.Transaction{
-		User_id:         1,
-		Card_id:         2,
-		Amount_us_cents: 100,
+		UserId:        1,
+		CardId:        2,
+		AmountUsCents: 100,
 	})
 
 	context.UserProcessSpend(transaction.Transaction{
-		User_id:         2,
-		Card_id:         1,
-		Amount_us_cents: 100,
+		UserId:        2,
+		CardId:        1,
+		AmountUsCents: 100,
 	})
 
 	// ASSERT

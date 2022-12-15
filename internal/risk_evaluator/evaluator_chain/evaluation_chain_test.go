@@ -11,7 +11,7 @@ import (
 func TestShouldProcessAllChainForTransaction_Bellow5K(t *testing.T) {
 	// ARRANGE
 	transaction := transaction.Transaction{
-		Amount_us_cents: 4_000_00,
+		AmountUsCents: 4_000_00,
 	}
 	head := rule.AmountAbove10K()
 	node1 := rule.AmountAbove5K()
@@ -34,7 +34,7 @@ func TestShouldProcessAllChainForTransaction_Bellow5K(t *testing.T) {
 func TestShouldProcessChainForTransaction_Bellow10K(t *testing.T) {
 	// ARRANGE
 	transaction := transaction.Transaction{
-		Amount_us_cents: 7_000_00,
+		AmountUsCents: 7_000_00,
 	}
 	head := rule.AmountAbove10K()
 	node1 := rule.AmountAbove5K()
@@ -57,7 +57,7 @@ func TestShouldProcessChainForTransaction_Bellow10K(t *testing.T) {
 func TestShouldProcessChainForTransaction_Above10K(t *testing.T) {
 	// ARRANGE
 	transaction := transaction.Transaction{
-		Amount_us_cents: 10_500_00,
+		AmountUsCents: 10_500_00,
 	}
 	head := rule.AmountAbove10K()
 	node1 := rule.AmountAbove5K()
